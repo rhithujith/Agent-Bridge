@@ -95,14 +95,32 @@ class _MainDashboardState extends State<MainDashboard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildHeader(),
-                  const SizedBox(height: 32),
-                  _buildSummaryCards(),
-                  const SizedBox(height: 32),
-                  const Text("LIVE ACTION FEED", style: TextStyle(color: ABColors.muted, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
-                  const SizedBox(height: 16),
-                  Expanded(child: _buildLogTable()),
-                ],
+                    _buildHeader(), // Always shows at the top
+                    const SizedBox(height: 32),
+
+                    // DASHBOARD VIEW (Index 0)
+                    if (_selectedIndex == 0) ...[
+                      _buildSummaryCards(),
+                      const SizedBox(height: 32),
+                      const Text("LIVE ACTION FEED",
+                          style: TextStyle(color: ABColors.muted, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                      const SizedBox(height: 16),
+                      Expanded(child: _buildLogTable()),
+                    ],
+
+                    // INCIDENTS VIEW (Index 1)
+                    if (_selectedIndex == 1) ...[
+                      const Text("SECURITY INCIDENTS",
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: ABColors.danger)),
+                      const SizedBox(height: 24),
+                      Expanded(child: _buildLogTable()), // Only flagged rows will show here
+                    ],
+
+                    // REPORT VIEW (Index 2)
+                    if (_selectedIndex == 2) ...[
+                      _buildReportView(), // The function I gave you in the last message
+                    ],
+                  ],
               ),
             ),
           ),
@@ -193,6 +211,22 @@ class _MainDashboardState extends State<MainDashboard> {
             ),
           );
         },
+      ),
+    );
+  }
+  Widget _buildReportView() {
+    return Expanded(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.analytics_outlined, size: 100, color: ABColors.muted.withOpacity(0.3)),
+            const SizedBox(height: 20),
+            const Text("Compliance Reports", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            const Text("Detailed audit logs and PDF export coming in MVP Phase.", style: TextStyle(color: ABColors.muted)),
+          ],
+        ),
       ),
     );
   }
