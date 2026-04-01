@@ -1,4 +1,4 @@
-from dao import DAO
+from core_ai.dao import DAO
 from typing import List, Dict, Any
 from datetime import datetime
 import uuid

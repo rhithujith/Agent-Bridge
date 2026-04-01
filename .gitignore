@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+.venv/
+venv/
+node_modules/
+dist/
+build/
+.DS_Store
+reproduce_test.py
+reproduce_output.txt
+reproduce_output_v2.txt
+reproduce_output_v3.txt

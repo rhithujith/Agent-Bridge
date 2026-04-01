@@ -1,4 +1,4 @@
-from dao import DAO
+from core_ai.dao import DAO
 from typing import Any, Dict
 import uuid
 from datetime import datetime
@@ -17,12 +17,12 @@ def parse_to_dao(raw_log: Dict[str, Any]) -> DAO:
     )
 
     # --- Session ID ---
-    session_id = (
-        str(raw_log.get("session_id"))
-        or str(raw_log.get("run_id"))
-        or str(raw_log.get("trace_id"))
-        or "session_unknown"
+    session_id_raw = (
+        raw_log.get("session_id")
+        or raw_log.get("run_id")
+        or raw_log.get("trace_id")
     )
+    session_id = str(session_id_raw) if session_id_raw is not None else "session_unknown"
 
     # --- Timestamp ---
     timestamp = (

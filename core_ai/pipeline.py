@@ -1,7 +1,7 @@
-from dao import DAO
-from parser import parse_to_dao
-from anomaly import check_anomalies
-from compliance import map_compliance
+from core_ai.dao import DAO
+from core_ai.parser import parse_to_dao
+from core_ai.anomaly import check_anomalies
+from core_ai.compliance import map_compliance
 from typing import Any, Dict
 
 
